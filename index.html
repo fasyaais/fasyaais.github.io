@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metode numerik</title>
+
+    <link rel="stylesheet" href="style.css">
+</head> 
+<body>
+    <div class="container">
+        <h3>Menghitung luas dan Keliling Persegi Panjang</h3>
+        <div id="panjang">
+            <label for="">Panjang</label>
+            <input type="text" class="panjang">
+        </div>
+        <div id="lebar">
+            <label for="">Lebar</label>
+        <input type="text" class="lebar">
+        </div>
+        <div class="btn">
+            <button class="submit">Cari!</button>
+        </div>
+        <p class="result"></p>
+    </div>
+<script>
+    const submit = document.querySelector(".submit")
+    const result = document.querySelector(".result")
+
+    submit.addEventListener("click", () =>{
+        const panjang = parseFloat(document.querySelector(".panjang").value)
+        const lebar = parseFloat(document.querySelector(".lebar").value)
+
+        let luas = panjang * lebar
+        let keliling = 2*(panjang+lebar)
+        let diagonal = Math.sqrt(panjang*panjang+lebar*lebar)
+        result.innerHTML = `Luas : ${luas},  keliling : ${keliling}diagonal : ${diagonal}`
+    })
+</script>
+</body>
+</html>
