@@ -72,41 +72,29 @@
             <p style="color: white; padding-top: 10px; padding-bottom: 10px;">Luas : <span class="luas"></span></p>
         </div>
         <div>
-            <p style="color: white; padding-bottom: 10px;">Volume : <span class="volume"></span></p>
-        </div>
-        <div>
-            <p style="color: white; padding-bottom: 20px;">Galat : <span class="galat"></span></p>
+            <p style="color: white; padding-bottom: 20px;">Volume : <span class="volume"></span></p>
         </div>
     </div>  
 
     <script type="text/javascript">
 
-    let btn = document.querySelector('.btn');
-    let luas = document.querySelector('.luas');
-    let volume = document.querySelector('.volume');
-    let galat = document.querySelector('.galat');
 
-    btn.addEventListener('click', function () {
-        let p = document.querySelector('.panjang').value;
-        let l = document.querySelector('.lebar').value;
+        
+        let btn = document.querySelector('.btn');
+        let luas = document.querySelector('.luas');
+        let volume = document.querySelector('.volume');
+
+        btn.addEventListener('click', function (){
+            let p = document.querySelector('.panjang').value;
+            let l = document.querySelector('.lebar').value;
 
         if (!p || !l) {
-            alert('Panjang Dan Lebar Harus Diisi')
+            alert ('Panjang Dan Lebar Harus Diisi')
             return;
-        }
-
-        let luasResult = p * l;
-        let volumeResult = 2 * (parseFloat(p) + parseFloat(l));
-
-        luas.innerHTML = luasResult;
-        volume.innerHTML = volumeResult;
-
-        // Menghitung Galat
-        let galatResult = Math.abs(luasResult - volumeResult);
-        galat.innerHTML = galatResult.toFixed(2);
-    });
-</script>
-
+          }
+            luas.innerHTML = p * l;
+            volume.innerHTML = 2 * (parseFloat(p) + parseFloat(l));
+        });
     </script>
 </body>
 </html>

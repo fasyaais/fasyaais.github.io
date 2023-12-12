@@ -65,36 +65,28 @@
         <p style="color: skyblue;">Diagonal = (panjang^2 + lebar^2)^(1/2)</p>
     </div>
         <div class="wrapper">
-            <p style="color: white; padding-top: 10px;">Diagonal : <span class="volume"></span></p>
-        </div>
-                <div class="wrapper">
-            <p style="color: white; padding-bottom: 10px;">Galat : <span class="galat"></span></p>
+            <p style="color: white; padding-top: 10px; padding-bottom: 10px;">Diagonal : <span class="volume"></span></p>
         </div>
     </div>  
 
-<script type="text/javascript">
-    let btn = document.querySelector('.btn');
-    let diagonal = document.querySelector('.volume');
-    let galat = document.querySelector('.galat');
+    <script type="text/javascript">
 
-    btn.addEventListener('click', function () {
-        let p = document.querySelector('.panjang').value;
-        let l = document.querySelector('.lebar').value;
+
+        
+        let btn = document.querySelector('.btn');
+        let luas = document.querySelector('.luas');
+        let volume = document.querySelector('.volume');
+
+        btn.addEventListener('click', function (){
+            let p = document.querySelector('.panjang').value;
+            let l = document.querySelector('.lebar').value;
 
         if (!p || !l) {
-            alert('Panjang Dan Lebar Harus Diisi')
+            alert ('Panjang Dan Lebar Harus Diisi')
             return;
-        }
-
-        let diagonalResult = Math.sqrt(p*p + l*l);
-        diagonal.innerHTML = diagonalResult;
-
-        // Menghitung Galat
-        let panjangLebarDiagonal = Math.sqrt(p*p + l*l);
-        let galatResult = Math.abs(panjangLebarDiagonal - diagonalResult);
-        galat.innerHTML = galatResult.toFixed(2);
-    });
-</script>
-
+          }
+            volume.innerHTML = Math.sqrt(p*p+l*l);
+        });
+    </script>
 </body>
 </html>
