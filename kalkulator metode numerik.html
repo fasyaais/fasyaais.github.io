@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Metode Iterasi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+ 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 100vh;
+        }
+        /* .definition{
+            background-color: #0056b3;
+        } */
+        .container, .definition {
+            
+            background: #0e0621;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            color: white;
+            border: 1px solid #ccc;
+            margin-top: 50px;
+            border-radius: 5px;
+            padding: 20px;
+            height: fit-content;
+            
+            /* margin-top: 90px; background: black; padding-bottom: 50px; margin-bottom: 80px; */
+        }
+        input {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background: darkgray;
+        }
+        input:hover {
+            background-color: white;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 183px;
+            background-color: green;
+            color: #fff;
+            align-content: center;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transition: 0.5s;
+            box-shadow: 0 0px 10px 2px white;
+
+        }
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body style="background: #0e0621;   font-family: 'Rubik', sans-serif;">
+    <div class="wrapper">
+    <div class="container" style="background:black;">
+        <h3 style="text-align: center; padding-bottom: 20px; color: white;">Kalkulator Metode Numerik dengan menggunakan Metode Iterasi</h3>
+        <input type="text" id="fx" placeholder="f(x)">
+        <input type="text" id="batas-bawah" placeholder="Toleransi, Misalnya ( 1e - 6 )">
+        <input type="text" id="batas-atas" placeholder="Maksimum Iterasi">
+        <input type="text" id="batas-atas" placeholder="Maksimum Iterasi">
+        <button onclick="metodeIterasi()">Hitung</button>   
+        <!-- <div style="text-align: left; padding-right: 20px; color: white;">
+            <h4 style="color: crimson;">Cara Penghitungan Metode Iterasi:</h4>
+            <p>Metode Iterasi digunakan untuk mencari akar persamaan matematika. Langkah-langkahnya adalah sebagai berikut:</p>
+            <ol style="color:lightblue;">
+                <li>Tentukan nilai awal (x0), toleransi (tol), dan maksimum iterasi (maxIter).</li>
+                <li>Gunakan rumus iterasi: x<sub>i+1</sub> = f(x<sub>i</sub>) untuk menghitung x baru.</li>
+                <li>Lakukan iterasi hingga salah satu kondisi terpenuhi:
+                    <ul>
+                        <li>Hasil iterasi telah mencapai toleransi yang diinginkan (|f(x<sub>i+1</sub>)| <= tol).</li>
+                        <li>Iterasi telah mencapai maksimum iterasi (iter >= maxIter).</li>
+                    </ul>
+                </li>
+                <li>Jika hasil iterasi memenuhi toleransi, maka x merupakan perkiraan akar persamaan.</li>
+            </ol>
+            <p>Hasil iterasi akan ditampilkan di bawah.</p>
+        </div> -->
+        <div>
+            <p id="result" style="color: white; padding-top: 20px;"></p>
+        </div>
+    </div>
+    <div class="definition" style="background: black;">
+        <h2 style="font-style: italic; color:crimson;">Definisi metode Simpson 3/8</h2>
+        <p>Metode Simpson 3/8 adalah metode numerik dalam kalkulus untuk melakukan estimasi integral tertentu. Metode ini menggunakan pendekatan kurva dengan membagi area di bawah kurva menjadi segmen-segmen menggunakan polinomial derajat dua (dalam bentuk parabola) dan mengestimasi integral di setiap segmen tersebut dengan menggunakan rumus Simpson 3/8.<br><br>
+
+        Dalam metode Simpson 3/8, area di bawah kurva dipecah menjadi segmen-segmen yang lebarnya sama dengan menggunakan tiga titik data secara bersamaan, dan kemudian setiap segmen tersebut diaproksimasi dengan sebuah polinomial derajat dua. Metode ini lebih akurat dibandingkan dengan metode trapesium atau metode Simpson 1/3 untuk kasus tertentu, terutama ketika jumlah segmen yang digunakan merupakan kelipatan dari 3.</p>
+    </div>
+
+
+    </div>
+
+
+    <script>
+        function f(x) {
+            return Math.pow(3*x+20, 1/3);
+        }
+
+        function metodeIterasi() {
+            let fx = parseFloat(document.getElementById('fx').value);
+            let awal = parseFloat(document.getElementById('batas-awal').value);
+            let bawah = parseInt(document.getElementById('batas-bawah').value);
+
+            let x = x0;
+            let iter = 0;
+            let temp = x;
+
+            while (Math.abs(f(x)) > tol && iter < maxIter) {
+                temp = x;
+                x = f(x);
+                iter++;
+            }
+
+            if ((Math.abs((x - temp) / x) * 100) <= tol) {
+                document.getElementById('result').textContent = `Hasil: x = ${x.toFixed(6)} dengan toleransi ${tol} dan iterasi ke-${iter}`;
+            } else {
+                document.getElementById('result').textContent = `Metode iterasi tidak konvergen setelah ${maxIter} iterasi.`;
+            }
+        }
+
+
+        function simpson38(f, a, b, m = 90) {
+            let h = (b - a) / m; // Jarak selang
+            let x = a; // Awal selang
+            let I = f(a) + f(b);
+            let sigma = 0;
+
+            if (m % 3 !== 0) {
+                throw new Error("Jumlah panel harus kelipatan 3");
+            } else {
+                for (let i = 1; i < m; i++) {
+                x += h;
+                if (i % 3 === 0) {
+                    sigma += 2 * f(x);
+                } else {
+                    sigma += 3 * f(x);
+                }
+                }
+            }
+
+            return (3 * h / 8) * (I + sigma);
+        }
+
+        // Contoh penggunaan
+        function fungsiContoh(x) {
+            return x * x; 
+        }
+
+        // Ganti dengan fungsi yang sesuai
+        let hasil = simpson38(fungsiContoh, 0, 2, 90);
+        console.log("Hasil: " + hasil);
+
+
+    </script>
+</body>
+</html>
